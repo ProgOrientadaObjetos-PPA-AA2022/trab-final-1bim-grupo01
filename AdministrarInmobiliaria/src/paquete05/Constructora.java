@@ -7,8 +7,22 @@ package paquete05;
 
 /**
  *
- * @author reroes
+ * @author grupo01
  */
 public class Constructora {
-    
+    private String nombre;
+    private String id;
+
+    public Constructora(String n, String i) {
+        nombre = n;
+        id = i;
+    }
+
+    public String obtenerNombre() {
+        return nombre;
+    }
+
+    public String obtenerId() {
+        return id;
+    }
 }

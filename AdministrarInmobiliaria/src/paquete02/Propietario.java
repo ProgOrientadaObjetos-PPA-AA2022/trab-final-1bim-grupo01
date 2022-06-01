@@ -7,8 +7,29 @@ package paquete02;
 
 /**
  *
- * @author reroes
+ * @author grupo01
  */
 public class Propietario {
     
+    private String nombre;
+    private String apellido;
+    private int identificacion;
+
+    public Propietario(String n, String a, int id) {
+        nombre = n;
+        apellido = a;
+        identificacion = id;
+    }
+
+    public String obtenerNombre() {
+        return nombre;
+    }
+
+    public String obtenerApellido() {
+        return apellido;
+    }
+
+    public int obtenerIdentificacion() {
+        return identificacion;
+    }
 }

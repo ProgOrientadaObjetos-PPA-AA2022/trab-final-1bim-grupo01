@@ -7,7 +7,7 @@ package paquete06;
 
 /**
  *
- * @author reroes
+ * @author grupo01
  */
 public class Departamento {
     

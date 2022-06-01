@@ -7,7 +7,7 @@ package paquete01;
 
 /**
  *
- * @author reroes
+ * @author grupo01
  */
 public class Ejecutor {
     
