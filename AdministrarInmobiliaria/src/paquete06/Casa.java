@@ -15,7 +15,6 @@ import paquete05.Constructora;
  * @author grupo01
  */
 public class Casa {
-    private String nombre;
     private Propietario propietario;
     private double precioMetro;
     private int metroCuadrado;
@@ -25,8 +24,8 @@ public class Casa {
     private int numeroCuartos;
     private Constructora constructora;
 
-    public Casa(String nom, Barrio barr, Ciudad ciud) {
-        nombre = nom;
+    public Casa(Propietario prop, Barrio barr, Ciudad ciud) {
+        propietario = prop;
         barrio = barr;
         ciudad = ciud;
     }
@@ -62,9 +61,9 @@ public class Casa {
     public void establecerConstructora(Constructora c) {
         constructora = c;
     }
-
-    public String obtenerNombre() {
-        return nombre;
+    
+    public void calcular(){
+        costoFinal = precioMetro * metroCuadrado;
     }
 
     public Propietario obtenerPropietario() {
