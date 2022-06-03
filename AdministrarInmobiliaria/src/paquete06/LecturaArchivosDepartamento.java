@@ -147,4 +147,37 @@ public class LecturaArchivosDepartamento {
             System.exit(1);
         } // fin de catch
     } // fin del método cerrarArchivo
+    
+    
+    @Override
+    public String toString() {
+        String cadena = "Lista de Departamentos\n";
+        for (int i = 0; i < obtenerDepartamentos().size(); i++) {
+            Departamento p = obtenerDepartamentos().get(i);
+            cadena = String.format("%sDepartamento %s\nNombre del Propietario : %s"
+                    + "\nApellido del Propietario: %s\nIdentificación del "
+                    + "Propietario: %s\nPrecio por metro cuadrado: %.2f\n"
+                    + "Valor de la alicuota: %.2f\n"
+                    + "Número de metros cuadrados: %s\nCosto final: %.2f\n"
+                    + "Nombre del barrio: %s\nReferencia: %s\nNombre de la"
+                    + " Ciudad: %s\nNombre de la Provincia: %s\nNúmero de"
+                    + " cuartos: %s\nNombre de la constructora: %s\n"
+                    + "Id de la empresa: %s\n", 
+                    cadena,
+                    i+1,
+                    p.obtenerPropietario().obtenerNombre(),
+                    p.obtenerPropietario().obtenerApellido(),
+                    p.obtenerPropietario().obtenerIdentificacion(),
+                    p.obtenerPrecioMetro(), 
+                    p.obtenerAlicuota(),p.obtenerMetroCuadrado(),
+                    p.obtenerCostoFinal(), p.obtenerBarrio().obtenerNombre(),
+                    p.obtenerBarrio().obtenerReferencia(),
+                    p.obtenerCiudad().obtenerNombre(),
+                    p.obtenerCiudad().obtenerProvincia(),
+                    p.obtenerNumeroCuartos(),p.obtenerConstructora().obtenerNombre(),
+                    p.obtenerConstructora().obtenerId());
+        }
+
+        return cadena;
+    }
 }
