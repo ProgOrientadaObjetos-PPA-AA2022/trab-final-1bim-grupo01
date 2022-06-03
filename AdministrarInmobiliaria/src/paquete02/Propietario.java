@@ -5,17 +5,19 @@
  */
 package paquete02;
 
+import java.io.Serializable;
+
 /**
  *
  * @author grupo01
  */
-public class Propietario {
+public class Propietario implements Serializable{
     
     private String nombre;
     private String apellido;
-    private int identificacion;
+    private String identificacion;
 
-    public Propietario(String n, String a, int id) {
+    public Propietario(String n, String a, String id) {
         nombre = n;
         apellido = a;
         identificacion = id;
@@ -29,7 +31,7 @@ public class Propietario {
         return apellido;
     }
 
-    public int obtenerIdentificacion() {
+    public String obtenerIdentificacion() {
         return identificacion;
     }
 }

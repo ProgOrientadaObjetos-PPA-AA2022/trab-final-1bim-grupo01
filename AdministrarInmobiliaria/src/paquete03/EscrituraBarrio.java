@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package paquete06;
+package paquete03;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,24 +14,25 @@ import java.util.ArrayList;
  *
  * @author Usuario iTC
  */
-public class EscrituraArchivosCasa {
+public class EscrituraBarrio {
     private String nombreArchivo;
     private ObjectOutputStream salida; 
-    private Casa registroCasa;
-    private ArrayList<Casa> listaCasa;
+    private Barrio registroBarrio;
+    private ArrayList<Barrio> listaBarrio;
 
-    public EscrituraArchivosCasa(String nombreArc) {
+    public EscrituraBarrio(String nombreArc) {
         nombreArchivo = nombreArc;
-        establecerListaCasas(); // obtener los valores (objetos)
+        establecerListaBarrio(); // obtener los valores (objetos)
+        
                                     // que tiene el archivo.
         try // abre el archivo
         {
             salida = new ObjectOutputStream(
                     new FileOutputStream(nombreArchivo));
             // proceso para ingresar nuevamente los valores del archivo
-            if (obtenerListaCasas().size() > 0) {
-                for (int i = 0; i < obtenerListaCasas().size(); i++) {
-                    establecerRegistroCasa(obtenerListaCasas().get(i));
+            if (obtenerListaBarrio().size() > 0) {
+                for (int i = 0; i < obtenerListaBarrio().size(); i++) {
+                    establecerRegistroBarrio(obtenerListaBarrio().get(i));
                     establecerSalida();
                 }
             }
@@ -41,17 +42,19 @@ public class EscrituraArchivosCasa {
         } // fin de catch
     }
     
+    public void establecerRegistroBarrio(Barrio p) {
+        registroBarrio = p;
+    }
+    
     public void establecerNombreArchivo(String n){
         nombreArchivo = n;
     }
-
-    public void establecerRegistroCasa(Casa p) {
-        registroCasa = p;
-    }
+    
+    
 
     public void establecerSalida() {
         try {
-            salida.writeObject(registroCasa); // envía el registro como 
+            salida.writeObject(registroBarrio); // envía el registro como 
                                                   // objeto al archivo
         } catch (IOException ex) {
             System.err.println(ex);
@@ -60,19 +63,19 @@ public class EscrituraArchivosCasa {
 
     // en el atributo listaProfesores obtenemos los registros 
     // del archivo
-    public void establecerListaCasas() {
-        LecturaArchivosCasa l = 
-                new LecturaArchivosCasa(obtenerNombreArchivo());
-        l.establecerCasas();
-        listaCasa = l.obtenerCasas();
+    public void establecerListaBarrio() {
+        LecturaBarrio l = 
+                new LecturaBarrio(obtenerNombreArchivo());
+        l.establecerBarrio();
+        listaBarrio = l.obtenerBarrio();
     }
 
     public String obtenerNombreArchivo(){
         return nombreArchivo;
     }
     
-    public ArrayList<Casa> obtenerListaCasas() {
-        return listaCasa;
+    public ArrayList<Barrio> obtenerListaBarrio() {
+        return listaBarrio;
     }
 
     public ObjectOutputStream obtenerSalida(){

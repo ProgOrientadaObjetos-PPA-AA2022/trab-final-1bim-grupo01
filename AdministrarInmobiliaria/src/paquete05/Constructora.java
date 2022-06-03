@@ -5,11 +5,13 @@
  */
 package paquete05;
 
+import java.io.Serializable;
+
 /**
  *
  * @author grupo01
  */
-public class Constructora {
+public class Constructora implements Serializable{
     private String nombre;
     private String id;
 
