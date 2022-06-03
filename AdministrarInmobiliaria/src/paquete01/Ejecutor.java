@@ -273,6 +273,10 @@ public class Ejecutor {
                     dep.establecerConstructora(constructora_buscar);
                     dep.establecerAlicuota(alicuota);
                     departamentos.add(dep);
+                    
+                    archivoDepar.establecerRegistroDepartamentos(departamentos.get(contadorDepartamentos));
+                    // establecer en el archivo el atributo del registro
+                    archivoDepar.establecerSalida();
                     break;
                 default:
                     break;
