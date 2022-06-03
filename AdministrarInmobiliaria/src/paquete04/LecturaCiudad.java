@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import paquete02.Propietario;
 import paquete03.Barrio;
 
 /**
@@ -106,7 +107,7 @@ public class LecturaCiudad {
         identificador = n;
     }
     
-    public Ciudad obtenerCiudadBuscado() {
+    public Ciudad obtenerCiudadBuscada() {
         return ciudadBuscada;
     }
 
@@ -134,4 +135,17 @@ public class LecturaCiudad {
             System.exit(1);
         } // fin de catch
     } // fin del método cerrarArchivo
+    
+    public String toString() {
+        String cadena = "Lista de Ciudades\n";
+        for (int i = 0; i < obtenerCiudad().size(); i++) {
+            Ciudad p = obtenerCiudad().get(i);
+            cadena = String.format("%sCiudad: %s\nProvincia: %s\n", 
+                    cadena,
+                    p.obtenerNombre(),
+                    p.obtenerProvincia());
+        }
+
+        return cadena;
+    }
 }

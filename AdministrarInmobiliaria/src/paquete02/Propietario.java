@@ -11,8 +11,8 @@ import java.io.Serializable;
  *
  * @author grupo01
  */
-public class Propietario implements Serializable{
-    
+public class Propietario implements Serializable {
+
     private String nombre;
     private String apellido;
     private String identificacion;
@@ -31,7 +31,18 @@ public class Propietario implements Serializable{
         return apellido;
     }
 
+    /**
+     *
+     * @return
+     */
     public String obtenerIdentificacion() {
         return identificacion;
+    }
+
+    @Override
+    public String toString() {
+        String cadena = String.format("Propietario\nNombre: %s\nApellido: %s\n"
+                + "Identificacion: %s\n", nombre,apellido,identificacion);
+        return cadena;
     }
 }

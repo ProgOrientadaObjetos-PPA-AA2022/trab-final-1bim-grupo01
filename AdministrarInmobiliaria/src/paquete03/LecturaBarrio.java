@@ -134,4 +134,19 @@ public class LecturaBarrio {
             System.exit(1);
         } // fin de catch
     } // fin del método cerrarArchivo
+    
+    @Override
+    public String toString() {
+        String cadena = "Lista de Barrios\n";
+        for (int i = 0; i < obtenerBarrio().size(); i++) {
+            Barrio p = obtenerBarrio().get(i);
+            cadena = String.format("%sBarrio %s: %s\nReferencia: %s\n", 
+                    cadena,
+                    i+1,
+                    p.obtenerNombre(),
+                    p.obtenerReferencia());
+        }
+
+        return cadena;
+    }
 }

@@ -137,9 +137,9 @@ public class LecturaArchivosCasa {
     @Override
     public String toString() {
         String cadena = "Lista de Casas\n";
-        System.out.println(casas.size());
-        for (int i = 0; i < casas.size(); i++) {
-            Casa p = casas.get(i);
+        System.out.println(obtenerCasas().size());
+        for (int i = 0; i < obtenerCasas().size(); i++) {
+            Casa p = obtenerCasas().get(i);
             cadena = String.format("%sCasa %s\nNombre del Propietario : %s"
                     + "\nApellido del Propietario: %s\nIdentificación del "
                     + "Propietario: %s\nPrecio por metro cuadrado: %.2f\n"

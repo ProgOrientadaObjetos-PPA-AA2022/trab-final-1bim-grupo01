@@ -80,7 +80,7 @@ public class LecturaConstructora {
                 try {
                     Constructora registro = (Constructora) entrada.readObject();
                     
-                    if(registro.obtenerNombre().equals(identificador)){
+                    if(registro.obtenerId().equals(identificador)){
                         constructoraBuscada = registro;
                         break;
                     }
@@ -134,4 +134,19 @@ public class LecturaConstructora {
             System.exit(1);
         } // fin de catch
     } // fin del método cerrarArchivo
+    
+    @Override
+    
+    public String toString() {
+        String cadena = "Lista de Constructoras\n";
+        for (int i = 0; i < obtenerConstructora().size(); i++) {
+            Constructora p = obtenerConstructora().get(i);
+            cadena = String.format("%sConstructora: %s\nIdentificacion: %s\n", 
+                    cadena,
+                    p.obtenerNombre(),
+                    p.obtenerId());
+        }
+
+        return cadena;
+    }
 }

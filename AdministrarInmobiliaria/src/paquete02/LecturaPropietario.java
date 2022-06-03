@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import paquete03.Barrio;
 
 /**
  *
@@ -69,7 +70,7 @@ public class LecturaPropietario {
         }
     }
     
-    public void establecerPropietarioBuscada() {
+    public void establecerPropietarioBuscado() {
         // 
         
         File f = new File(obtenerNombreArchivo());
@@ -134,6 +135,18 @@ public class LecturaPropietario {
         } // fin de catch
     } // fin del método cerrarArchivo
 
+    
+   @Override
+   public String toString() {
+        String cadena = "Lista de Propietarios\n";
+        for (int i = 0; i < obtenerPropietario().size(); i++) {
+            Propietario p = obtenerPropietario().get(i);
+            cadena = String.format("%sNombre: %s\nIdentificacion: %s\n", 
+                    cadena,
+                    p.obtenerNombre(),
+                    p.obtenerIdentificacion());
+        }
 
-   
+        return cadena;
+    }
 }

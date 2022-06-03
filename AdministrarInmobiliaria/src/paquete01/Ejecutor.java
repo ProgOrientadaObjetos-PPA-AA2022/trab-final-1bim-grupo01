@@ -36,7 +36,12 @@ public class Ejecutor {
         String nombreArchivoDepartamento = "departamento.dat";
         int opc;
 
-        int i = 0, j = 0;
+        int contadorCasas = 0;
+        int contadorDepartamentos = 0;
+        int contadorPropietario = 0;
+        int contadorBarrio = 0;
+        int contadorCiudad = 0;
+        int contadorConstructora = 0;
         EscrituraPropietario archivoP
                 = new EscrituraPropietario("propietario.dat");
 
@@ -49,6 +54,11 @@ public class Ejecutor {
         EscrituraConstructora archivoCo
                 = new EscrituraConstructora("constructora.dat");
 
+        EscrituraArchivosCasa archivoCasa
+                = new EscrituraArchivosCasa(nombreArchivoCasa);
+
+        EscrituraArchivosDepartamento archivoDepar
+                = new EscrituraArchivosDepartamento(nombreArchivoCasa);
         do {
             opc = men.menu();
             switch (opc) {
@@ -63,38 +73,10 @@ public class Ejecutor {
                     Propietario prop = new Propietario(nombreProp, apellidoProp, idProp);
                     propietario.add(prop);
 
-                    archivoP.establecerRegistroPropietario(propietario.get(i));
+                    archivoP.establecerRegistroPropietario(propietario.get(contadorPropietario));
                     // establecer en el archivo el atributo del registro
                     archivoP.establecerSalida();
-
-                    /*
-                    String nombre_buscar = "2222";
-                    Barrio barrio_buscar;
-                    LecturaBarrio lecturaB
-                            = new LecturaBarrio("barrio.dat");
-                    lecturaB.establecerIdentificador(nombre_buscar);
-                    lecturaB.establecerBarrioBuscado();
-                    barrio_buscar = barrio.obtenerBarrioBuscado();
-                    if (hospital_buscar != null) {
-                        System.out.println(hospital_buscar);
-                    } else {
-                        System.out.println("Hospital no encontrado");
-                    }*/
-
-                    // establecer el valor del atributo registr
-                    //archivoP.establecerRegistroPropietario(propietario.get(i));
-                    // establecer en el archivo el atributo del registro
-                    //archivoP.establecerSalida();
-                    /*
-
-                    Casa cas = new Casa(prop, barr, ciud);
-                    cas.establecerMetrosCuadrado(metros);
-                    cas.establecerPrecioMetro(precioM2);
-                    cas.establecerNumeroCuartos(nCuartos);
-                    cas.calcularFinal();
-                    cas.establecerConstructora(constr);
-                    casas.add(cas);
-                     */
+                    contadorPropietario++;
                     break;
                 case 2:
 
@@ -106,19 +88,11 @@ public class Ejecutor {
                     Barrio barr = new Barrio(nombreBarr, referencia);
                     barrio.add(barr);
 
-                    archivoB.establecerRegistroBarrio(barrio.get(i));
+                    archivoB.establecerRegistroBarrio(barrio.get(contadorBarrio));
                     // establecer en el archivo el atributo del registro
                     archivoB.establecerSalida();
-                    /*
-                    Departamento dep = new Departamento(propD, barrD, ciudD);
-                    dep.establecerMetrosCuadrado(metros);
-                    dep.establecerPrecioMetro(precioM2);
-                    dep.establecerNumeroCuartos(nCuartos);
-                    dep.calcularFinal();
-                    dep.establecerConstructora(constrD);
-                    dep.establecerAlicuota(alicuota);
-                    departamentos.add(dep);
-                     */
+                    contadorBarrio++;
+
                     break;
 
                 case 3:
@@ -129,9 +103,10 @@ public class Ejecutor {
                     Ciudad ciud = new Ciudad(nombreCiud, nombreProv);
                     ciudad.add(ciud);
 
-                    archivoC.establecerRegistroCiudad(ciudad.get(i));
+                    archivoC.establecerRegistroCiudad(ciudad.get(contadorCiudad));
                     // establecer en el archivo el atributo del registro
                     archivoC.establecerSalida();
+                    contadorCiudad++;
                     break;
 
                 case 4:
@@ -142,9 +117,11 @@ public class Ejecutor {
                     Constructora constr = new Constructora(nombreConstr, idEmpresa);
                     constructora.add(constr);
 
-                    archivoCo.establecerRegistroConstructora(constructora.get(i));
+                    archivoCo.establecerRegistroConstructora(constructora.get(contadorConstructora));
                     // establecer en el archivo el atributo del registro
                     archivoCo.establecerSalida();
+
+                    contadorConstructora++;
                     break;
 
                 case 5:
@@ -154,14 +131,74 @@ public class Ejecutor {
                     metros = entrada.nextInt();
                     System.out.println("Ingrese el número de cuartos: ");
                     nCuartos = entrada.nextInt();
-                    /*
-                    Casa cas = new Casa(prop, barr, ciud);
+                    System.out.println("Para ingresar un propietario, ingrese"
+                            + " su identificacion");
+
+                    entrada.nextLine();
+                    String nombre_buscar = entrada.nextLine();
+                    Propietario propietario_buscar;
+                    LecturaPropietario lecturaP
+                            = new LecturaPropietario("propietario.dat");
+                    lecturaP.establecerIdentificador(nombre_buscar);
+                    lecturaP.establecerPropietarioBuscado();
+                    propietario_buscar = lecturaP.obtenerPropietarioBuscado();
+                    if (propietario_buscar == null) {
+                        System.out.println("Propietario no encontrado");
+                    }
+
+                    System.out.println("Para ingresar un barrio, ingrese el "
+                            + "nombre del mismo");
+                    nombre_buscar = entrada.nextLine();
+                    Barrio barrio_buscar;
+                    LecturaBarrio lecturaB
+                            = new LecturaBarrio("barrio.dat");
+                    lecturaB.establecerIdentificador(nombre_buscar);
+                    lecturaB.establecerBarrioBuscado();
+                    barrio_buscar = lecturaB.obtenerBarrioBuscado();
+                    if (barrio_buscar == null) {
+                        System.out.println("Barrio no encontrado");
+                    }
+
+                    System.out.println("Para ingresar una ciudad, ingrese el "
+                            + "nombre de la misma");
+                    nombre_buscar = entrada.nextLine();
+                    Ciudad ciudad_buscar;
+                    LecturaCiudad lecturaC
+                            = new LecturaCiudad("ciudad.dat");
+                    lecturaC.establecerIdentificador(nombre_buscar);
+                    lecturaC.establecerCiudadBuscada();
+                    ciudad_buscar = lecturaC.obtenerCiudadBuscada();
+                    if (ciudad_buscar == null) {
+                        System.out.println("Ciudad no encontrada");
+                    }
+
+                    System.out.println("Para ingresar una constructora, ingrese el "
+                            + "id de la empresa");
+                    String id_buscar = entrada.nextLine();
+                    Constructora constructora_buscar;
+                    LecturaConstructora lecturaCo
+                            = new LecturaConstructora("constructora.dat");
+                    lecturaCo.establecerIdentificador(id_buscar);
+                    lecturaCo.establecerConstructoraBuscada();
+                    constructora_buscar = lecturaCo.obtenerConstructoraBuscada();
+                    if (constructora_buscar == null) {
+                        System.out.println("Constructora no encontrada");
+                    }
+
+                    Casa cas = new Casa(propietario_buscar, barrio_buscar,
+                            ciudad_buscar);
                     cas.establecerMetrosCuadrado(metros);
                     cas.establecerPrecioMetro(precioM2);
                     cas.establecerNumeroCuartos(nCuartos);
                     cas.calcularFinal();
-                    cas.establecerConstructora(constr);
-                    casas.add(cas);*/
+                    cas.establecerConstructora(constructora_buscar);
+                    casas.add(cas);
+
+                    archivoCasa.establecerRegistroCasa(casas.get(contadorCasas));
+                    // establecer en el archivo el atributo del registro
+                    archivoCasa.establecerSalida();
+
+                    contadorCasas++;
                     break;
 
                 case 6:
@@ -173,58 +210,83 @@ public class Ejecutor {
                     nCuartos = entrada.nextInt();
                     System.out.println("Ingrese el valor de la alícuota: ");
                     alicuota = entrada.nextDouble();
+                    entrada.nextLine();
                     System.out.println("Ingrese el nombre del edificio: ");
                     String nombreEd = entrada.nextLine();
+
+                    System.out.println("Para ingresar un propietario, ingrese"
+                            + " su identificación");
+                    entrada.nextLine();
+                    nombre_buscar = entrada.nextLine();
+                    LecturaPropietario lecturaPr
+                            = new LecturaPropietario("propietario.dat");
+                    lecturaPr.establecerIdentificador(nombre_buscar);
+                    lecturaPr.establecerPropietarioBuscado();
+                    propietario_buscar = lecturaPr.obtenerPropietarioBuscado();
+                    if (propietario_buscar == null) {
+                        System.out.println("Propietario no encontrado");
+                    }
+
+                    System.out.println("Para ingresar un barrio, ingrese el "
+                            + "nombre del mismo");
+                    nombre_buscar = entrada.nextLine();
+                    LecturaBarrio lecturaBa
+                            = new LecturaBarrio("barrio.dat");
+                    lecturaBa.establecerIdentificador(nombre_buscar);
+                    lecturaBa.establecerBarrioBuscado();
+                    barrio_buscar = lecturaBa.obtenerBarrioBuscado();
+                    if (barrio_buscar == null) {
+                        System.out.println("Barrio no encontrado");
+                    }
+
+                    System.out.println("Para ingresar una ciudad, ingrese el "
+                            + "nombre de la misma");
+                    nombre_buscar = entrada.nextLine();
+                    LecturaCiudad lecturaCi
+                            = new LecturaCiudad("ciudad.dat");
+                    lecturaCi.establecerIdentificador(nombre_buscar);
+                    lecturaCi.establecerCiudadBuscada();
+                    ciudad_buscar = lecturaCi.obtenerCiudadBuscada();
+                    if (ciudad_buscar == null) {
+                        System.out.println("Ciudad no encontrada");
+                    }
+
+                    System.out.println("Para ingresar una constructora, ingrese el "
+                            + "id de la empresa");
+                    id_buscar = entrada.nextLine();
+
+                    LecturaConstructora lecturaCon
+                            = new LecturaConstructora("constructora.dat");
+                    lecturaCon.establecerIdentificador(id_buscar);
+                    lecturaCon.establecerConstructoraBuscada();
+                    constructora_buscar = lecturaCon.obtenerConstructoraBuscada();
+                    if (ciudad_buscar == null) {
+                        System.out.println("Constructora no encontrado");
+                    }
+
+                    Departamento dep = new Departamento(propietario_buscar,
+                            barrio_buscar, ciudad_buscar);
+                    dep.establecerMetrosCuadrado(metros);
+                    dep.establecerPrecioMetro(precioM2);
+                    dep.establecerNumeroCuartos(nCuartos);
+                    dep.calcularFinal();
+                    dep.establecerConstructora(constructora_buscar);
+                    dep.establecerAlicuota(alicuota);
+                    departamentos.add(dep);
                     break;
                 default:
                     break;
             }
         } while (opc != 0);
 
-        /*
-        EscrituraArchivosCasa archivo
-                = new EscrituraArchivosCasa(nombreArchivoCasa);
-
-        for (int x = 0; x < casas.size(); x++) {
-            // establecer el valor del atributo registr
-            archivo.establecerRegistroCasa(casas.get(x));
-            // establecer en el archivo el atributo del registro
-            archivo.establecerSalida();
-        }
-
-        archivo.cerrarArchivo();
-        
-        LecturaArchivosCasa lectura
-                = new LecturaArchivosCasa(nombreArchivoCasa);
-        lectura.establecerCasas();
-        System.out.println(lectura);
-         
-        EscrituraArchivosDepartamento archivoD
-                = new EscrituraArchivosDepartamento(nombreArchivoDepartamento);
-
-        for (int x = 0; x < departamentos.size(); x++) {
-            // establecer el valor del atributo registr
-            archivoD.establecerRegistroDepartamentos(departamentos.get(x));
-            // establecer en el archivo el atributo del registro
-            archivo.establecerSalida();
-        }
-
-        archivoD.cerrarArchivo();
-
-       
-        LecturaArchivosDepartamento lecturaD
-                = new LecturaArchivosDepartamento(nombreArchivoDepartamento);
-        lecturaD.establecerDepartamentos();
-        System.out.println(lecturaD);
-         */
         do {
             opc = men.menu2();
             switch (opc) {
                 case 1:
-                    LecturaArchivosCasa lectura
-                            = new LecturaArchivosCasa(nombreArchivoCasa);
-                    lectura.establecerCasas();
-                    System.out.println(lectura);
+                    LecturaArchivosCasa lecturaCasa
+                            = new LecturaArchivosCasa(nombreArchivoDepartamento);
+                    lecturaCasa.establecerCasas();
+                    System.out.println(lecturaCasa);
 
                     break;
                 case 2:
@@ -233,7 +295,7 @@ public class Ejecutor {
                     lecturaD.establecerDepartamentos();
                     System.out.println(lecturaD);
                     break;
-                case 3:
+                case 3:;
                     LecturaPropietario lecturaP
                             = new LecturaPropietario("propietario.dat");
                     lecturaP.establecerPropietario();
